@@ -1,38 +1,15 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const graphqlHttp = require('express-graphql')
-// const {buildSchema} = require('graphql')
-const mongoose = require('mongoose')
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './app/screens/HomeScreen';
+import WelcomeScreen from './app/screens/WelcomeScreen';
+import LoginScreen from './app/screens/LoginScreen';
+import SignUpScreen from './app/screens/SignUpScreen';
+import AccountScreen from './app/screens/AccountScreen';
+import MessageScreen from './app/screens/MessageScreen';
 
-const schema = require('./schema/schema')
 
-
-
-
-const app = express()
-
-app.use(bodyParser.json())
-app.use('/graphql' , graphqlHttp.graphqlHTTP({
-    schema : schema ,
-    graphiql: true
-}))
-
-try{
-    mongoose.connect('mongodb+srv://support:support@cluster0.zjijz.mongodb.net/lending?retryWrites=true&w=majority',
-    {
-        useNewUrlParser : true ,
-        useUnifiedTopology: true
-    })
-
-    mongoose.connection.once('open', ()=>{
-        console.log("Connected to database cluster lending")
-    })
-}
-catch(err){
-    console.log(err)
+export default function App() {
+  return <MessageScreen />
 }
 
-
-app.listen(3000 , ()=>{
-    console.log("Connected to port 3000")
-})
